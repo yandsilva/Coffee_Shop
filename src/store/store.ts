@@ -14,6 +14,127 @@ export const useStore = create(
       FavoritesList: [],
       CartList: [],
       OrderHistoryList: [],
+      addToCart: (cartItem: any) =>
+        set(
+          produce((state) => {
+            let found = false;
+            for (let i = 0; i < state.CartList.length; i++) {
+              if (state.CartList[i].id == cartItem.id) {
+                found = true;
+                let size = false;
+                for (let j = 0; j < state.CartList[i].prices.length; j++) {
+                  if (
+                    state.CartList[i].prices[j].size == cartItem.prices[0].size
+                  ) {
+                    size = true;
+                    state.CartList[i].prices[j].quantity++;
+                    break;
+                  }
+                }
+                if (size == false) {
+                  state.CartList[i].prices.push(cartItem.prices[0]);
+                }
+                state.CartList[i].prices.sort((a: any, b: any) => {
+                  if (a.size > b.size) {
+                    return -1;
+                  }
+                  if (a.size < b.size) {
+                    return 1;
+                  }
+                  return 0;
+                });
+                break;
+              }
+            }
+            if (found == false) {
+              state.CartList.push(cartItem);
+            }
+          })
+        ),
+      calculateCartPrice: () =>
+        set(
+          produce((state) => {
+            let totalprice = 0;
+            for (let i = 0; i < state.CartList.length; i++) {
+              let tempprice = 0;
+              for (let j = 0; j < state.CartList[i].prices.length; j++) {
+                tempprice =
+                  tempprice +
+                  parseFloat(state.CartList[i].prices[j].price) *
+                    state.CartList[i].prices[j].quantity;
+              }
+              state.CartList[i].tempprice.toFixed(2).toString();
+              totalprice = totalprice + tempprice;
+            }
+            state.CartPrice = totalprice.toFixed(2).toString();
+          })
+        ),
+      addToFavoriteList: (type: string, id: string) =>
+        set(
+          produce((state) => {
+            if (type == "Coffee") {
+              for (let i = 0; i < state.CoffeeList.length; i++) {
+                if (state.CoffeeList[i].id == id) {
+                  if (state.CoffeeList[i].fovourite == false) {
+                    state.CoffeeList[i].fovourite = true;
+                    state.FavoritesList.unshift(state.CoffeeList[i]);
+                  } else {
+                    state.CoffeeList[i].fovourite = false;
+                  }
+                  break;
+                }
+              }
+            } else if (type == "Bean") {
+              for (let i = 0; i < state.BeansList.length; i++) {
+                if (state.BeansList[i].id == id) {
+                  if (state.BeansList[i].fovourite == false) {
+                    state.BeansList[i].fovourite = true;
+                    state.FavoritesList.unshift(state.BeansList[i]);
+                  } else {
+                    state.BeanList[i].favourite = false;
+                  }
+                  break;
+                }
+              }
+            }
+          })
+        ),
+      deleteFromFavoriteList: (type: string, id: string) =>
+        set(
+          produce((state) => {
+            if (type == "Coffee") {
+              for (let i = 0; i < state.CoffeeList.length; i++) {
+                if (state.CoffeeList[i].id == id) {
+                  if (state.CoffeeList[i].fovourite == true) {
+                    state.CoffeeList[i].fovourite = false;
+                  } else {
+                    state.CoffeeList[i].favourite = true;
+                  }
+                  break;
+                }
+              }
+            } else if (type == "Beans") {
+              for (let i = 0; i < state.BeansList.length; i++) {
+                if (state.BeansList[i].id == id) {
+                  if (state.BeansList[i].fovourite == true) {
+                    state.BeansList[i].fovourite = false;
+                  } else {
+                    state.BeanList[i].favourite = true;
+                  }
+                  break;
+                }
+              }
+            }
+            let spliceIndex = -1;
+            for (let i = 0; i < state.FavoritesList.length; i++) {
+              if (state.FavoritesList[i].id == id) {
+                spliceIndex = i;
+                break;
+              }
+            }
+            state.FavoritesList.splice(spliceIndex, 1);
+          })
+        ),
     }),
     {
       name: "coffee-app",

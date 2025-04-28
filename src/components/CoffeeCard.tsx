@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.space_15,
     position: "absolute",
     borderBottomLeftRadius: BORDERRADIUS.radius_20,
-    borderBottomRightRadius: BORDERRADIUS.radius_20,
+    borderTopRightRadius: BORDERRADIUS.radius_20,
     top: 0,
     right: 0,
   },
