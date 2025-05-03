@@ -1,18 +1,38 @@
 import React, { useCallback, useEffect } from "react";
 import { View, StatusBar } from "react-native";
-import { useFonts } from "expo-font";
+import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigator from "./src/navigators/TabNavigator";
 import DetailsScreen from "./src/screens/DetailsScreen";
 import PaymentScreen from "./src/screens/PaymentScreen";
+import {
+  Poppins_900Black,
+  Poppins_700Bold,
+  Poppins_800ExtraBold,
+  Poppins_200ExtraLight,
+  Poppins_300Light,
+  Poppins_500Medium,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_100Thin,
+} from "@expo-google-fonts/poppins";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded] = Font.useFonts({
     IcoMoon: require("./assets/fonts/app_icons.ttf"),
+    Poppins_900Black,
+    Poppins_700Bold,
+    Poppins_800ExtraBold,
+    Poppins_200ExtraLight,
+    Poppins_300Light,
+    Poppins_500Medium,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+    Poppins_100Thin,
   });
 
   useEffect(() => {
@@ -36,7 +56,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
+      <StatusBar barStyle="light-content" backgroundColor="transparent" />
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen
