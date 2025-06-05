@@ -63,7 +63,8 @@ const DetailsScreen = ({ navigation, route }: any) => {
       prices: [{ ...price, quantity: 1 }],
     });
     calculateCartPrice();
-    navigation.navigate("Cart");
+
+    navigation.navigate("Tab", { screen: "Cart" });
   };
 
   return (
@@ -154,7 +155,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
           buttonPressHandler={() => {
             addToCartHandler({
               id: ItemOfIndex.id,
-              index: route.params.index,
+              index: ItemOfIndex.index,
               name: ItemOfIndex.name,
               roasted: ItemOfIndex.roasted,
               imagelink_square: ItemOfIndex.imagelink_square,
