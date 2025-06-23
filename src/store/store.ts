@@ -9,7 +9,7 @@ export const useStore = create(
   persist(
     (set, get) => ({
       CoffeeList: CoffeeData,
-      BeansList: BeansData,
+      BeanList: BeansData,
       CartPrice: 0,
       FavoritesList: [],
       CartList: [],
@@ -157,19 +157,21 @@ export const useStore = create(
               if (state.CartList[i].id == id) {
                 for (let j = 0; j < state.CartList[i].prices.length; j++) {
                   if (state.CartList[i].prices[j].size == size) {
-                    if (state.CartList[i].prices[j].quantity > 1) {
-                      state.CartList[i].prices[j].quantity--;
+                    if (state.CartList[i].prices.length > 1) {
+                      if (state.CartList[i].prices[j].quantity > 1) {
+                        state.CartList[i].prices[j].quantity--;
+                      } else {
+                        state.CartList[i].prices.splice(j, 1);
+                      }
                     } else {
-                      state.CartList[i].prices.splice(j, 1);
+                      if (state.CartList[i].prices[j].quantity > 1) {
+                        state.CartList[i].prices[j].quantity--;
+                      } else {
+                        state.CartList.splice(i, 1);
+                      }
                     }
-                  } else {
-                    if (state.CartList[i].prices[j].quantity > 1) {
-                      state.CartList[i].prices[j].quantity--;
-                    } else {
-                      state.CartList.splice(j, 1);
-                    }
+                    break;
                   }
-                  break;
                 }
               }
             }
@@ -202,7 +204,7 @@ export const useStore = create(
                 CartListPrice: temp.toFixed(2).toString(),
               });
             }
-            state.CarList = [];
+            state.CartList = [];
           })
         ),
     }),
