@@ -49,7 +49,9 @@ const getCoffeeList = (category: string, data: any) => {
 
 const HomeScreen = ({ navigation }: any) => {
   const CoffeeList = useStore((state: any) => state.CoffeeList);
-  const BeansList = useStore((state: any) => state.BeansList);
+  const BeanList = useStore((state: any) => state.BeanList);
+
+  console.log(BeanList);
 
   const addToCart = useStore((state: any) => state.addToCart);
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
@@ -276,7 +278,7 @@ const HomeScreen = ({ navigation }: any) => {
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={BeansList}
+          data={BeanList}
           contentContainerStyle={[
             styles.FlatListContainer,
             { marginBottom: tabBarHeight },
