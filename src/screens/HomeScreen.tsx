@@ -51,8 +51,6 @@ const HomeScreen = ({ navigation }: any) => {
   const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeanList = useStore((state: any) => state.BeanList);
 
-  console.log(BeanList);
-
   const addToCart = useStore((state: any) => state.addToCart);
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
 
