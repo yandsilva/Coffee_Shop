@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, View } from "react-native";
 import { useStore } from "../store/store";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { COLORS, SPACING } from "../theme/theme";
@@ -12,7 +12,8 @@ const OrderHistoryScreen = () => {
   const OrderHistoryList = useStore((state: any) => state.OrderHistoryList);
   const tabBarHeight = useBottomTabBarHeight();
   const [showAnimation, setShowAnimation] = useState(false);
-  console.log("History - ", OrderHistoryList);
+
+  // console.log("History - ", OrderHistoryList);
 
   return (
     <View style={styles.ScreenContainer}>

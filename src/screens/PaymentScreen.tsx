@@ -51,6 +51,8 @@ const PaymentScreen = ({ navigation, route }: any) => {
     (state: any) => state.addToOrderHistoryListFromCart
   );
 
+  // console.log("History - ", addToOrderHistoryListFromCart);
+
   const [paymentMode, setPaymentMode] = useState("Credit Card");
   const [showAnimation, setShowAnimation] = useState(false);
 

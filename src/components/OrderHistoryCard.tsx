@@ -16,6 +16,7 @@ const OrderHistoryCard: React.FC<OrderHistoryCardProps> = ({
   CartListPrice,
   OrderDate,
 }) => {
+  // console.log("OrderHistoryCard", CartList, CartListPrice);
   return (
     <View style={styles.CardContainer}>
       <View style={styles.CardHeader}>

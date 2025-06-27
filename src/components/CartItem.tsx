@@ -40,6 +40,7 @@ const CartItem: React.FC<CartItemProps> = ({
   incrementCartItemQuantityHandler,
   decrementCartItemQuantityHandler,
 }) => {
+  // console.log("CartItem", name);
   return (
     <View>
       {prices.length != 1 ? (
