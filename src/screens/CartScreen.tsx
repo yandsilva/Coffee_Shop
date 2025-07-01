@@ -22,7 +22,6 @@ const CartScreen = ({ navigation, route }: any) => {
     (state: any) => state.incrementCartItemQuantity
   );
 
-  console.log("Cart - ", CartList);
   const decrementCartItemQuantity = useStore(
     (state: any) => state.decrementCartItemQuantity
   );

@@ -14,7 +14,7 @@ interface OrderItemCardProps {
   name: string;
   imagelink_square: ImageProps;
   special_ingredient: string;
-  price: any;
+  prices: any;
   ItemPrice: string;
 }
 
@@ -23,9 +23,10 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
   name,
   imagelink_square,
   special_ingredient,
-  price,
+  prices,
   ItemPrice,
 }) => {
+  // console.log("prices", prices);
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
@@ -47,6 +48,39 @@ const OrderItemCard: React.FC<OrderItemCardProps> = ({
           </Text>
         </View>
       </View>
+      {prices.map((data: any, index: any) => (
+        <View key={index.toString()} style={styles.CardTableRow}>
+          <View style={styles.CardTableRow}>
+            <View style={styles.SizeBoxLeft}>
+              <Text
+                style={[
+                  styles.SizeText,
+                  {
+                    fontSize:
+                      type == "Bean" ? FONTSIZE.size_12 : FONTSIZE.size_16,
+                  },
+                ]}
+              >
+                {data.size}
+              </Text>
+            </View>
+            <View style={styles.PriceBoxRight}>
+              <Text style={styles.PriceCurrency}>
+                {data.currency}
+                <Text style={styles.Price}>{data.price}</Text>
+              </Text>
+            </View>
+          </View>
+          <View style={styles.CardTableRow}>
+            <Text style={styles.CardQuantityPriceText}>
+              X<Text style={styles.Price}>{data.quantity}</Text>
+            </Text>
+            <Text style={styles.CardQuantityPriceText}>
+              $ {(data.quantity * data.price).toFixed(2).toString()}
+            </Text>
+          </View>
+        </View>
+      ))}
     </LinearGradient>
   );
 };
@@ -89,6 +123,53 @@ const styles = StyleSheet.create({
   },
   CardPrice: {
     color: COLORS.primaryWhiteHex,
+  },
+  CardTableRow: {
+    flex: 1,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  SizeBoxLeft: {
+    backgroundColor: COLORS.primaryBlackHex,
+    height: 45,
+    flex: 1,
+    borderTopLeftRadius: BORDERRADIUS.radius_10,
+    borderBottomLeftRadius: BORDERRADIUS.radius_10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRightWidth: 1,
+    borderRightColor: COLORS.primaryGreyHex,
+  },
+  SizeText: {
+    fontFamily: FONTFAMILY.poppins_medium,
+    color: COLORS.secondaryLightGreyHex,
+  },
+  PriceBoxRight: {
+    backgroundColor: COLORS.primaryBlackHex,
+    height: 45,
+    flex: 1,
+    borderTopRightRadius: BORDERRADIUS.radius_10,
+    borderBottomRightRadius: BORDERRADIUS.radius_10,
+    justifyContent: "center",
+    alignItems: "center",
+    borderLeftWidth: 1,
+    borderLeftColor: COLORS.primaryGreyHex,
+  },
+  PriceCurrency: {
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_18,
+    color: COLORS.primaryOrangeHex,
+  },
+  Price: {
+    color: COLORS.primaryWhiteHex,
+  },
+  CardQuantityPriceText: {
+    flex: 1,
+    textAlign: "center",
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_18,
+    color: COLORS.primaryOrangeHex,
   },
 });
 
